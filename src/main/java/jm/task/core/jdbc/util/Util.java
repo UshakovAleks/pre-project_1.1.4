@@ -9,7 +9,24 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 public class Util {
-    public static Connection getConnection() {
+
+    private Connection connection;
+
+    private static Util instance;
+    private Util() {
+        this.connection = getCon();
+    }
+    public static Util getUtil() {
+        if (instance == null) {
+            instance = new Util();
+        }
+        return instance;
+    }
+    public Connection getConnection() {
+        return connection;
+    }
+
+        private static Connection getCon() {
         Connection connection = null;
         try {
             connection = DriverManager.getConnection(
@@ -19,6 +36,8 @@ public class Util {
         }
         return connection;
     }
+
+
 
     private static String getConfig(String config) {
         FileInputStream fis;
