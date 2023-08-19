@@ -67,6 +67,7 @@ public class Util {
         prop.setProperty("hibernate.connection.password", "Valera83797");
         prop.setProperty("hibernate.connection.driver_class", "com.mysql.jdbc.Driver");
         prop.setProperty("show_sql", "true");
+        prop.setProperty("hibernate.hbm2ddl.auto","update");
 
         SessionFactory sessionFactory = new Configuration().addProperties(prop).buildSessionFactory();
         return  sessionFactory;
