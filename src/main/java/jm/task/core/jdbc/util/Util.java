@@ -17,7 +17,7 @@ public class Util {
     private static Util instance;
     private Util() {
         this.connection = getCon();
-        this.sessionFactory = getSession();
+        this.sessionFactory = getSessionFac();
     }
     public static Util getUtil() {
         if (instance == null) {
@@ -56,7 +56,7 @@ public class Util {
         return conf;
     }
 
-    private static SessionFactory getSession(){
+    private static SessionFactory getSessionFac(){
         Properties prop= new Properties();
 
         prop.setProperty("hibernate.connection.url", "jdbc:mysql://localhost:3306/test");
@@ -69,7 +69,7 @@ public class Util {
         prop.setProperty("show_sql", "true");
         prop.setProperty("hibernate.hbm2ddl.auto","update");
 
-        SessionFactory sessionFactory = new Configuration().addProperties(prop).buildSessionFactory();
+        SessionFactory sessionFactory = new Configuration().addProperties(prop).addAnnotatedClass(jm.task.core.jdbc.model.User.class).buildSessionFactory();
         return  sessionFactory;
     }
     public SessionFactory getSessionFactory() {
